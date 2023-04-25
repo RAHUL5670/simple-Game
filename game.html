@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+    <style>
+        .playground {
+            position: relative;
+            background-color: gray;
+            height: 600px;
+            width: 600px;
+            float: left;
+        }
+
+        .mango {
+            position: relative;
+            height: 70px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="playground">
+        <img class="mango" id="mango" onclick="hitmango()" src="/imges/mango.avif" alt="">
+    </div>
+
+    <div class="controls">
+      <h3 id="newGame"></h3>
+        <h3>
+            <span>Total</span>
+            <span id="totalHit"></span>
+        </h3>
+        <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <script>
+        let hitcounts = 0
+        let isGameStart = false;
+
+        function startGame() {
+            document.getElementById("newGame").innerText="Game Started"
+            hitcounts = 0;
+            isGameStart = true
+            let mango = document.getElementById("mango")
+            let time = setInterval(() => {
+                let i = Math.floor(Math.random() * 580 + 1);
+                let j = Math.floor(Math.random() * 580 + 1);
+                let k = Math.floor(Math.random() * 580 + 1);
+                let p = Math.floor(Math.random() * 580 + 1)
+                mango.style.left = i + "px"
+                mango.style.top = j + "px"
+                mango.style.right = k + "px"
+                mango.style.bottom = p + "px"
+            }, 2500)
+
+            setTimeout(() => {
+                clearTimeout(time)
+                isGameStart=false;
+                document.getElementById("newGame").innerText="Game Over"
+            }, 30000)
+        }
+
+        function hitmango() {
+            if (isGameStart) {
+                hitcounts++;
+                document.getElementById('totalHit').innerText = hitcounts;
+
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>
